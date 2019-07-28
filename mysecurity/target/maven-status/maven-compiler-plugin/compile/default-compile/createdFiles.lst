@@ -1,0 +1,16 @@
+com\base\service\AuthUserService.class
+com\base\entity\CrmSysRoleMenu.class
+com\base\entity\AuthUser.class
+com\base\dao\CrmSysUserMapper.class
+com\base\dao\CrmSysRoleMapper.class
+com\base\dao\CrmSysRoleMenuMapper.class
+com\base\dao\CrmSysMenuMapper.class
+com\SecurityController.class
+com\config\MySecurityConfig.class
+com\entity\Users.class
+com\base\entity\CrmSysUserRole.class
+com\base\entity\CrmSysMenu.class
+com\base\entity\CrmSysUser.class
+com\controller\MyController.class
+com\base\entity\CrmSysRole.class
+com\base\dao\CrmSysUserRoleMapper.class

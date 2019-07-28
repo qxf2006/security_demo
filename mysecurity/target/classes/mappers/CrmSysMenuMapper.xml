@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dao.CrmSysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.base.entity.CrmSysMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="parentId" property="parentid" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="css" property="css" jdbcType="VARCHAR" />
+    <result column="href" property="href" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="isEnable" property="isenable" jdbcType="INTEGER" />
+    <result column="isDel" property="isdel" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_sys_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.base.entity.CrmSysMenu" >
+    insert into crm_sys_menu (id, parentId, `name`, 
+      css, href, `type`, permission, 
+      `sequence`, isEnable, isDel, 
+      createTime, updateTime)
+    values (#{id,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{css,jdbcType=VARCHAR}, #{href,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, #{permission,jdbcType=VARCHAR}, 
+      #{sequence,jdbcType=INTEGER}, #{isenable,jdbcType=INTEGER}, #{isdel,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.base.entity.CrmSysMenu" >
+    update crm_sys_menu
+    set parentId = #{parentid,jdbcType=INTEGER},
+      `name` = #{name,jdbcType=VARCHAR},
+      css = #{css,jdbcType=VARCHAR},
+      href = #{href,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=BIT},
+      permission = #{permission,jdbcType=VARCHAR},
+      `sequence` = #{sequence,jdbcType=INTEGER},
+      isEnable = #{isenable,jdbcType=INTEGER},
+      isDel = #{isdel,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, parentId, `name`, css, href, `type`, permission, `sequence`, isEnable, 
+    isDel, createTime, updateTime
+    from crm_sys_menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, parentId, `name`, css, href, `type`, permission, `sequence`, isEnable, 
+    isDel, createTime, updateTime
+    from crm_sys_menu
+  </select>
+</mapper>

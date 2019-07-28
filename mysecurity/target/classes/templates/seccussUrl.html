@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>上传设备</title>
+</head>
+<body>
+	登录成功页面
+	<p th:text="'登录成功 ' + ${user.username} + '!'"></p>
+	
+	<p th:text="'拥有以下权限' + ${user.authorities} + '!'"></p>
+	-------------------------------------------------
+	<p th:text="${user}"></p>
+	<div>
+		<div th:each="mn:${menu}">
+			<a th:text="${mn.name}" th:href="${mn.href}"></a>
+		</div>
+	</div>
+	<form action="/logout">
+		<input type="submit" value="退出">
+	</form>
+</body>
+<script type="text/javascript">
+	
+</script>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.base.dao.CrmSysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.base.entity.CrmSysRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="isEnable" property="isenable" jdbcType="BIT" />
+    <result column="isDel" property="isdel" jdbcType="BIT" />
+    <result column="createTime" property="createtime" jdbcType="VARCHAR" />
+    <result column="updateTime" property="updatetime" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from crm_sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.base.entity.CrmSysRole" >
+    insert into crm_sys_role (id, `name`, description, 
+      isEnable, isDel, createTime, 
+      updateTime)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{isenable,jdbcType=BIT}, #{isdel,jdbcType=BIT}, #{createtime,jdbcType=VARCHAR}, 
+      #{updatetime,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.base.entity.CrmSysRole" >
+    update crm_sys_role
+    set `name` = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      isEnable = #{isenable,jdbcType=BIT},
+      isDel = #{isdel,jdbcType=BIT},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      updateTime = #{updatetime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, `name`, description, isEnable, isDel, createTime, updateTime
+    from crm_sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, `name`, description, isEnable, isDel, createTime, updateTime
+    from crm_sys_role
+  </select>
+</mapper>
