@@ -43,7 +43,7 @@ public class AuthUserService implements UserDetailsService{
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		List<CrmSysUser> selectAll = scum.selectAll();
@@ -69,6 +69,13 @@ public class AuthUserService implements UserDetailsService{
 			return myUser;
 		}
 		return null; 
+	}
+	
+	public int insert(String username,String password) {
+		CrmSysUser user = new CrmSysUser();
+		user.setUsername(username);
+		user.setPassword(password);
+		return scum.insert(user);
 	}
 	
 	public User getUser() {

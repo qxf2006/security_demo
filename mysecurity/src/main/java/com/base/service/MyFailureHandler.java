@@ -16,10 +16,10 @@ public class MyFailureHandler implements AuthenticationFailureHandler{
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest req, HttpServletResponse rep, AuthenticationException arg2)
 			throws IOException, ServletException {
-		System.out.println(req);
-		System.out.println(rep);
-		System.out.println(arg2);
-		rep.sendRedirect("/");
+		rep.setCharacterEncoding("UTF-8");
+		rep.setContentType("application/json");
+		rep.getWriter().write("{\"code\":403,\"message\":\"账户密码错误\",\"data\":\"\"}");
+		rep.getWriter().flush();
 	}
 
 }

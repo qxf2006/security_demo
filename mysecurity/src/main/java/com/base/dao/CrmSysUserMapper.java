@@ -18,4 +18,5 @@ public interface CrmSysUserMapper {
     int updateByPrimaryKey(CrmSysUser record);
     
     CrmSysUser selectByUsername(String username);
+    
 }

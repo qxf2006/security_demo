@@ -66,6 +66,12 @@ public class MyController {
 	public String register() {
 		return "register";
 	}
+	@RequestMapping(value = "toRegister")
+	public String toRegister(String username,String password) {
+		int insert = aus.insert(username, password);
+		System.out.println(insert);
+		return "login";
+	}
 	
 	@RequestMapping(value = "/seccussUrl")
 	public String seccussUrl(Model model) {
