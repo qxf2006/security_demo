@@ -3,4 +3,4 @@
 ### 这是三级标题
 #### 这是四级标题
 
-[百度链接](www.baidu.com)
+[百度链接](http://www.baidu.com)
