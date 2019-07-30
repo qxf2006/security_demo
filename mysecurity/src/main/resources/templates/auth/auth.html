@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>上传设备</title>
+</head>
+<body>
+<!-- 	权限控制页面 -->
+	<div style="height: 300px;width: 30%;background-color: gray;float: left;">
+		用户列表
+		<div>
+			<div th:each="mn:${user}">
+				<span th:text="${mn.username}"></span>
+				<span>
+					<button type="button" th:onclick="'javascript:updateUser('+${mn.id}+')' ">修改权限</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div style="height: 300px;width: 30%;background-color: gray;float: right;margin-left: 5%;">
+		权限列表
+		<div>
+			<div th:each="mn:${menu}">
+				<span th:text="${mn.name}"></span>
+			</div>
+		</div>
+	</div>
+	<div style="height: 300px;width: 30%;background-color: gray;float: right;">
+		角色列表
+		<div>
+			<div th:each="mn:${role}">
+				<span th:text="${mn.name}"></span>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function updateUser(n){
+		alert(n);
+	}
+</script>
+</html>

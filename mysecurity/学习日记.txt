@@ -1,0 +1,74 @@
+<一>:nodejs使用
+	1,下载node.js安装完文件
+	2,安装完成后,win+r +>cmd,node -v 查看nodejs版本,npm -v查看npm版本
+	3,npm install -g create-react-app
+	4,在一个空文件价的地址栏输入 cmd
+	5,create-react-app my-app (my-app)是项目名字
+	6,cd my-app
+	7,npm start
+<二>:SpringBoot => Security配置:
+	1,maven依赖
+		<dependency>
+   			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+   		</dependency>
+	2,(新建java类继承WebSecurityConfigurerAdapter)public class MySecurityConfig extends WebSecurityConfigurerAdapter,
+	重写void configure(HttpSecurity http)配置登录url,登出url,无需权限的url等等
+	3,RBAC授权:在 void configure(HttpSecurity http) 方法里面配置相关url
+		.and().authorizeRequests().antMatchers("/register").permitAll().antMatchers("/toRegister").permitAll().anyRequest()
+		.access("@rbacService.hasPermission(request, authentication)") 【这里是重点】
+		.and().exceptionHandling().accessDeniedHandler(mad).and().csrf().disable();
+	【重点】
+		a,创建接口 public interface RbacService 里面只有一个方法 
+			public boolean hasPermission(HttpServletRequest request, Authentication authentication);
+		b,实现RbacService接口
+			private AntPathMatcher ant = new AntPathMatcher();
+
+			@Override
+			public boolean hasPermission(HttpServletRequest request, Authentication authentication) {
+			boolean permission = false;
+			//将Authentication强转成Object
+			Object principal = authentication.getPrincipal();
+			Set<String> st = new HashSet<>();
+			
+			//判断是否为登录对象
+			if (principal instanceof UserDetails) {
+				String username = ((UserDetails)principal).getUsername();
+				CrmSysUser user = scum.selectByUsername(username);
+				Integer userId = user.getId();
+				List<CrmSysUserRole> list = csurm.selectByUserId(userId);
+				for (CrmSysUserRole crmSysUserRole : list) {
+					CrmSysRole role = csrm.selectByPrimaryKey(crmSysUserRole.getRoleid());
+					List<CrmSysRoleMenu> menuList = csrmm.selectByRoleId(role.getId());
+					for (CrmSysRoleMenu crmSysRoleMenu : menuList) {
+						Integer menuid = crmSysRoleMenu.getMenuid();
+						CrmSysMenu menu = csmm.selectByPrimaryKey(menuid);
+						String href = menu.getHref();
+						System.out.println(href);
+						st.add(href);
+					}
+				}
+			}
+			System.out.println(st.toString());
+			for (String url : st) {
+				System.out.println(request.getRequestURI());
+				if (ant.match(url, request.getRequestURI())) {
+					permission = true;
+//					break;
+				}
+			}
+			return permission;
+		}
+	-------------------以上代码实现RBAC授权,俗称数据库授权------------------
+	4,认证(新建AuthUserService实现UserDetailsService) public class AuthUserService implements UserDetailsService
+		重写loadUserByUsername(String username)方法
+		a,根据username查询对象的角色
+		b,返回User对象spring自带的User对象 import org.springframework.security.core.userdetails.User;
+		c,User对象的构造方法里面放username,password,List<GrantedAuthority> authorities(权限集合),要么数据库里面存放ROLE_admin或者手动添加ROLE_字符串
+		d,认证失败(没有权限) MyAccessDeniedHandler implements AccessDeniedHandler 
+			.and().exceptionHandling().accessDeniedHandler(mad)
+		e,登录失败 MyFailureHandler implements AuthenticationFailureHandler
+			.failureHandler(mf)
+	5,图片验证码
+			
+		

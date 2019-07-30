@@ -31,7 +31,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 		.failureHandler(mf)
 		.and()
 		.authorizeRequests()
-		.antMatchers("/").permitAll()
+		.antMatchers("/","/code/image").permitAll()
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

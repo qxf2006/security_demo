@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.base.entity.CrmSysMenu;
+import com.base.entity.CrmSysRole;
+import com.base.entity.CrmSysUser;
 import com.base.service.AuthUserService;
 
 @Controller
@@ -61,6 +63,20 @@ public class MyController {
 	@RequestMapping(value = "/base/query")
     public String baseQuery(){
         return "base/query";
+    }
+//	@RequestMapping(value = "/code/image")
+//    public String getImage(){
+//        return "base/query";
+//    }
+	@RequestMapping(value = "auth/auth")
+    public String auth(Model model){
+		List<CrmSysUser> allUser = aus.getAllUser();
+		List<CrmSysRole> allRole = aus.getAllRole();
+		List<CrmSysMenu> allMenu = aus.getAllMenu();
+		model.addAttribute("user", allUser);
+		model.addAttribute("role", allRole);
+		model.addAttribute("menu", allMenu);
+        return "auth/auth";
     }
 	@RequestMapping(value = "register")
 	public String register() {

@@ -87,5 +87,13 @@ public class AuthUserService implements UserDetailsService{
 	public List<CrmSysMenu> getAllMenu (){
 		return csmm.selectAll();
 	}
+	
+	public List<CrmSysUser> getAllUser(){
+		return scum.selectAll();
+	}
+	
+	public List<CrmSysRole> getAllRole(){
+		return csrm.selectAll();
+	}
 
 }
