@@ -69,6 +69,6 @@
 			.and().exceptionHandling().accessDeniedHandler(mad)
 		e,登录失败 MyFailureHandler implements AuthenticationFailureHandler
 			.failureHandler(mf)
-	5,图片验证码
+	5,图片验证码 -->受伤也不投降
 			
 		
